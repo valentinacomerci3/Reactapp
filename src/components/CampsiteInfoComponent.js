@@ -37,19 +37,19 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
         }
         return <div/>
     }
-    function CampsiteInfo(props){
+    
+    function CampsiteInfo(props) {
         if (props.campsite) {
             return (
-            <div className="container">
-                <div className = "row">
-                    <RenderCampsite campsite = {props.campsite}/>
-                    <RenderComments comments = {props.campsite.comments}/>
+                <div className="container">
+                    <div className="row">
+                        <RenderCampsite campsite={props.campsite} />
+                        <RenderComments comments={props.campsite.comments} />
+                    </div>
                 </div>
-            </div>
             );
         }
-       return <div />;
+        return <div />;
     }
-}
-export default CampsiteInfo;
-
+    
+    export default CampsiteInfo;
