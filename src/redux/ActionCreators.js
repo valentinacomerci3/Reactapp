@@ -2,16 +2,6 @@ import * as ActionTypes from './ActionTypes';
 import { baseUrl } from '../shared/baseUrl';
 
 
-export const addComment = (campsiteId, rating, author, text) => ({
-    type: ActionTypes.ADD_COMMENT,
-    payload: {
-        campsiteId: campsiteId,
-        rating: rating,
-        author: author,
-        text: text
-    }
-});
-
 export const fetchCampsites = () => dispatch => {
     dispatch(campsitesLoading());
 
@@ -35,7 +25,6 @@ export const fetchCampsites = () => dispatch => {
         .catch(error => dispatch(campsitesFailed(error.message)));
 };
 
-
 export const campsitesLoading = () => ({
     type: ActionTypes.CAMPSITES_LOADING
 });
@@ -49,6 +38,8 @@ export const addCampsites = campsites => ({
     type: ActionTypes.ADD_CAMPSITES,
     payload: campsites
 });
+
+
 
 export const fetchComments = () => dispatch => {
     return fetch(baseUrl + 'comments')
@@ -74,6 +65,11 @@ export const fetchComments = () => dispatch => {
 export const commentsFailed = errMess => ({
     type: ActionTypes.COMMENTS_FAILED,
     payload: errMess
+});
+
+export const addComments = comments => ({
+    type: ActionTypes.ADD_COMMENTS,
+    payload: comments
 });
 
 export const addComment = comment => ({
@@ -139,6 +135,8 @@ export const fetchPromotions = () => dispatch => {
         .then(promotions => dispatch(addPromotions(promotions)))
         .catch(error => dispatch(promotionsFailed(error.message)));
 };
+
+
 
 export const promotionsLoading = () => ({
     type: ActionTypes.PROMOTIONS_LOADING
