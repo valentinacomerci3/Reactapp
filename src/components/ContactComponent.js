@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { Component } from 'react';
 import { Breadcrumb, BreadcrumbItem,
     Button, Label, Col, Row } from 'reactstrap';
@@ -10,13 +11,11 @@ const minLength = len => val => val && (val.length >= len);
 const isNumber = val => !isNaN(+val);
 const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
-
-
 class Contact extends Component {
-
 
     constructor(props) {
         super(props);
+
         this.state = {
             firstName: '',
             lastName: '',
@@ -36,53 +35,13 @@ class Contact extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    validate(firstName, lastName, phoneNum, email) {
-
-        const errors = {
-            firstName: '',
-            lastName: '',
-            phoneNum: '',
-            email: ''
-        };
-
-        if (this.state.touched.firstName) {
-            if (firstName.length < 2) {
-                errors.firstName = 'First name must be at least 2 characters.';
-            } else if (firstName.length > 15) {
-                errors.firstName = 'First name must be 15 or less characters.';
-            }
-        }
-
-        if (this.state.touched.lastName) {
-            if (lastName.length < 2) {
-                errors.lastName = 'Last name must be at least 2 characters.';
-            } else if (lastName.length > 15) {
-                errors.lastName = 'Last name must be 15 or less characters.';
-            }
-        }
-
-        const reg = /^\d+$/;
-        if (this.state.touched.phoneNum && !reg.test(phoneNum)) {
-            errors.phoneNum = 'The phone number should contain only numbers.';
-        }
-
-        if (this.state.touched.email && !email.includes('@')) {
-            errors.email = 'Email should contain a @';
-        }
-
-        return errors;
-    }
-
     handleSubmit(values) {
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
-        this.props.resetFeedbackForm();
+        this.props.resetFeedbackForm(); //when form is submitted, form values are rest to initial values//
+        this.props.postFeedback(values); //when form is submitted, form values are rest to initial values//
     }
-  
+
     render() {
-
-        const errors = this.validate(this.state.firstName, this.state.lastName, this.state.phoneNum, this.state.email);  
-
+        
         return (
             <div className="container">
                 <div className="row">
@@ -110,14 +69,13 @@ class Contact extends Component {
                         <a role="button" className="btn btn-link" href="mailto:fakeemail@fakeemail.co"><i className="fa fa-envelope-o" /> campsites@nucamp.co</a>
                     </div>
                 </div>
-
                 <div className="row row-content">
                     <div className="col-12">
                         <h2>Send us your Feedback</h2>
                         <hr />
                     </div>
                     <div className="col-md-10">
-                        <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}>
+                        <Form model="feedbackForm" onSubmit={values => this.handleSubmit(values)}>       
                             <Row className="form-group">
                                 <Label htmlFor="firstName" md={2}>First Name</Label>
                                 <Col md={10}>
@@ -262,6 +220,5 @@ class Contact extends Component {
         );
     }
 }
-
 
 export default Contact;
